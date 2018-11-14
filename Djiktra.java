@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Djiktra {
 
@@ -29,9 +30,8 @@ public class Djiktra {
     public int[] run(int[][] distances, int source) {
 
         Set<Node> visited = new HashSet<Node>();
-
-        TreeSet<Node> queue = new TreeSet<Node>(new NodeComparator());
-        queue.add(nodes[source]);
+        TreeSet<Node> queue = Arrays.stream(nodes)
+                .collect(Collectors.toCollection(()->new TreeSet<>(Comparator.comparing(n -> n.distance))));
 
         while(!queue.isEmpty()) {
             Node next = queue.first();
@@ -43,27 +43,19 @@ public class Djiktra {
                     if (c.distance > d) {
                         c.distance = d;
                         c.pred = next;
-                        if(queue.contains(c)) {
-                            queue.remove(c);
-                        }
+                        queue.remove(c);
                         queue.add(c);
                     }
                 }
             }
         }
+        
         int[] result = new int[numNodes];
         for(int i = 0; i < numNodes; i++) {
             result[i] = nodes[i].distance;
         }
 
         return result;
-    }
-
-    class NodeComparator implements Comparator<Node> {
-        @Override
-        public int compare(Node o1, Node o2) {
-            return o1.distance - o2.distance;
-        }
     }
 
     class Node {
