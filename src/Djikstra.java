@@ -1,3 +1,5 @@
+package src;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,7 +29,7 @@ public class Djikstra {
         nodes[source].distance = 0;
     }
 
-    public int[] run(int[][] distances, int source) {
+    public int[] run() {
 
         Set<Node> visited = new HashSet<Node>();
         TreeSet<Node> queue = Arrays.stream(nodes)
