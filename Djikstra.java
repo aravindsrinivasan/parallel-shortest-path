@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Djiktra {
+public class Djikstra {
 
     int[][] distances;
     int source;
@@ -9,7 +9,7 @@ public class Djiktra {
 
     Node[] nodes;
 
-    public Djiktra(int[][] d, int s) {
+    public Djikstra(int[][] d, int s) {
         this.distances = d;
         this.source = s;
         this.numNodes = d.length;
