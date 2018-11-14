@@ -1,1 +1,1 @@
-Java implementations of single-source and all-pairs shortest path
+Java implementations of single-source and all-pairs shortest paths
