@@ -2,7 +2,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class ParallelAllPairsDjikstraTest {
+public class TestParallelAllPairsDjikstra {
 
 
     @Test

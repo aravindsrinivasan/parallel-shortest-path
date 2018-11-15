@@ -2,7 +2,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 
-public class FloydWarshallTest {
+public class TestFloydWarshall {
     @Test
     public void test1(){
         int e = Integer.MAX_VALUE/2 - 1000;
