@@ -2,6 +2,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+import static org.junit.Assert.assertArrayEquals;
+
 public class TestParallelAllPairsDjikstra {
 
 
@@ -24,10 +26,7 @@ public class TestParallelAllPairsDjikstra {
                 {1, 6, 2, 0}
         };
         System.out.println(Arrays.deepToString(result));
-        //assertArrayEquals(expected, result);
-        FloydWarshall f = new FloydWarshall(edges);
-        System.out.println(Arrays.deepToString(f.run()));
-        //assertArrayEquals(expected, f.run());
+        assertArrayEquals(expected, result);
 
     }
 

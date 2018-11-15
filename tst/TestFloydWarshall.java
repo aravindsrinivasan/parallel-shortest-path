@@ -20,7 +20,7 @@ public class TestFloydWarshall {
         };
 
         FloydWarshall f = new FloydWarshall(edges);
-        int[][] result = f.run();
+        int[][] result = f.solve();
         assertArrayEquals(expected, result);
     }
 }

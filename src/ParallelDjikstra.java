@@ -11,8 +11,8 @@ public class ParallelDjikstra {
 
     private final static int NUMCORES = 32767;
 
-    public ParallelDjikstra(int[][] matrix, int s){
-        this.source = s;
+    public ParallelDjikstra(int[][] matrix, int source){
+        this.source = source;
         this.dist = matrix;
         this.numNodes = matrix.length;
         nodes = new Node[numNodes];
@@ -29,7 +29,7 @@ public class ParallelDjikstra {
         nodes[source].distance = 0;
     }
 
-    public int[] run() {
+    public int[] solve() {
         Set<Node> nodeSet = new HashSet<>(Arrays.asList(nodes));
         Set<Node> visited = new HashSet<>();
         ForkJoinPool pool = new ForkJoinPool(NUMCORES);
