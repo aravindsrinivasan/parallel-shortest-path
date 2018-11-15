@@ -6,25 +6,25 @@ import java.util.stream.Collectors;
 
 public class ParallelAllPairsDjikstra {
     int numNodes;
-    int[][] edges;
+    double[][] edges;
     ExecutorService executor;
 
-    public ParallelAllPairsDjikstra(int[][] e, int numThreads) {
+    public ParallelAllPairsDjikstra(double[][] e, int numThreads) {
         this.numNodes = e.length;
         this.edges = e;
         executor = Executors.newFixedThreadPool(numThreads);
     }
 
-    public int[][] run() {
-        List<Callable<List<Integer>>> tasks = new ArrayList<>();
+    public double[][] solve() {
+        List<Callable<List<Double>>> tasks = new ArrayList<>();
         for(int i = 0; i < numNodes; i++) {
             tasks.add(new SingleDjikstra(edges, i));
         }
         try {
-            List<Future<List<Integer>>> futures = executor.invokeAll(tasks);
-            int[][] result = new int[numNodes][numNodes];
+            List<Future<List<Double>>> futures = executor.invokeAll(tasks);
+            double[][] result = new double[numNodes][];
             for(int i = 0; i < numNodes; i++) {
-                result[i] = futures.get(i).get().stream().mapToInt(t -> t).toArray();
+                result[i] = futures.get(i).get().stream().mapToDouble(t -> t).toArray();
             }
             return result;
         } catch (InterruptedException |ExecutionException e) {
@@ -33,20 +33,20 @@ public class ParallelAllPairsDjikstra {
         return null;
     }
 
-    class SingleDjikstra implements Callable<List<Integer>> {
+    class SingleDjikstra implements Callable<List<Double>> {
 
         int source;
-        int[][] edges;
+        double[][] edges;
 
-        public SingleDjikstra(int[][] e, int s) {
+        public SingleDjikstra(double[][] e, int s) {
             this.edges = e;
             this.source = s;
         }
 
         @Override
-        public List<Integer> call() throws Exception {
+        public List<Double> call() throws Exception {
             Djikstra d = new Djikstra(edges, source);
-            return Arrays.stream(d.run()).boxed().collect(Collectors.toList());
+            return Arrays.stream(d.solve()).boxed().collect(Collectors.toList());
         }
     }
 

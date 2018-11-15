@@ -3,23 +3,23 @@ import java.util.stream.Collectors;
 
 public class Djikstra {
 
-    int[][] distances;
+    double[][] distances;
     int source;
     int numNodes;
 
     Node[] nodes;
 
-    public Djikstra(int[][] d, int s) {
+    public Djikstra(double[][] d, int s) {
         this.distances = d;
         this.source = s;
         this.numNodes = d.length;
         nodes = new Node[numNodes];
         for(int i = 0; i < numNodes; i++) {
-            nodes[i] = new Node(i, Integer.MAX_VALUE);
+            nodes[i] = new Node(i, Double.POSITIVE_INFINITY);
         }
         for(int i = 0; i < numNodes; i++) {
             for(int j = 0 ; j < numNodes; j++) {
-                if(d[i][j] != Integer.MAX_VALUE) {
+                if(d[i][j] != Double.POSITIVE_INFINITY) {
                     nodes[i].connections.add(nodes[j]);
                 }
             }
@@ -27,7 +27,7 @@ public class Djikstra {
         nodes[source].distance = 0;
     }
 
-    public int[] run() {
+    public double[] solve() {
 
         Set<Node> visited = new HashSet<Node>();
         TreeSet<Node> queue = Arrays.stream(nodes)
@@ -39,7 +39,7 @@ public class Djikstra {
             visited.add(next);
             for(Node c : next.connections) {
                 if(!visited.contains(c)) {
-                    int d = next.distance + distances[next.index][c.index];
+                    double d = next.distance + distances[next.index][c.index];
                     if (c.distance > d) {
                         c.distance = d;
                         c.pred = next;
@@ -50,7 +50,7 @@ public class Djikstra {
             }
         }
         
-        int[] result = new int[numNodes];
+        double[] result = new double[numNodes];
         for(int i = 0; i < numNodes; i++) {
             result[i] = nodes[i].distance;
         }
@@ -60,11 +60,11 @@ public class Djikstra {
 
     class Node {
         int index;
-        int distance;
+        double distance;
         Node pred;
         List<Node> connections;
 
-        public Node(int i, int d) {
+        public Node(int i, double d) {
             this.index = i;
             this.distance = d;
             this.pred = null;

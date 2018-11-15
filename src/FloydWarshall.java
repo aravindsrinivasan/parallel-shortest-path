@@ -1,17 +1,17 @@
 public class FloydWarshall {
 
-    int[][] dist;
+    double[][] dist;
     int V;
 
-    public FloydWarshall(int[][] matrix){
+    public FloydWarshall(double[][] matrix){
         V = matrix.length;
-        dist = new int[V][V];
+        dist = new double[V][V];
         for(int i = 0; i < V; i++)
             for(int j = 0; j < V; j++)
                 dist[i][j] = matrix[i][j];
     }
 
-    public int[][] run(){
+    public double[][] solve(){
         for (int k = 0; k < V; k++){
             // Pick all vertices as source one by one
             for (int i = 0; i < V; i++){

@@ -1,17 +1,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class ParallelFloydWarshall {
 
     private ExecutorService exec;
     private int numThreads;
-    private int[] current;
-    private int[] next;
+    private double[] current;
+    private double[] next;
 
     private int[] maxIndex;
     private int numNodes;
@@ -30,19 +27,17 @@ public class ParallelFloydWarshall {
     }
 
     /**
-     * @param numNodes the number of nodes in the graph
      * @param distances the matrix of distances between nodes, indexed from 0 to
      *                  numNodes-1.  distances[i][j] cost of a directed edge from
      *                  i to j.  Must be Double.POSITIVE_INFINITY if the edge is
      *                  not present.  distance[i][i] is a self arc (allowed).
      */
-    public ParallelFloydWarshall(int numNodes, int[][] distances,
-                                 ExecutorService exec, int numThreads){
-        this.exec = exec;
+    public ParallelFloydWarshall(double[][] distances, int numThreads){
+        this.exec = Executors.newFixedThreadPool(numThreads);
         this.numThreads = numThreads;
-        this.numNodes = numNodes;
-        this.current = new int[numNodes*numNodes];
-        this.next = new int[numNodes*numNodes];
+        this.numNodes = distances.length;
+        this.current = new double[numNodes*numNodes];
+        this.next = new double[numNodes*numNodes];
         this.maxIndex = new int[numNodes*numNodes];
         Arrays.fill(maxIndex, -1);
         for(int i = 0; i < numNodes; i++){
@@ -83,8 +78,7 @@ public class ParallelFloydWarshall {
             } catch (ExecutionException e) {
                 throw new RuntimeException(e);
             }
-            
-            int[] temp = current;
+            double[] temp = current;
             current = next;
             next = temp;
         }
@@ -101,7 +95,7 @@ public class ParallelFloydWarshall {
      *          (note that the graph may contain nodes with self loops).  Returns
      *         Double.POSITIVE_INFINITY if there is no path from i to j.
      */
-    public int shortestPathLength(int i, int j){
+    public double shorestPathLength(int i, int j){
         if(!solved){
             throw new RuntimeException("Must solve first");
         }
@@ -127,6 +121,16 @@ public class ParallelFloydWarshall {
             shortestPathHelper(i,j,ans);
             return ans;
         }
+    }
+
+    public double[][] allShortestPathLengths() {
+        double[][] result = new double[numNodes][numNodes];
+        for(int i = 0; i < numNodes; i++) {
+            for(int j = 0; j < numNodes; j++) {
+                result[i][j] = shorestPathLength(i, j);
+            }
+        }
+        return result;
     }
 
     public void shortestPathHelper(int i, int j, List<Integer> partialPath){
@@ -157,7 +161,7 @@ public class ParallelFloydWarshall {
             for(int index = lo; index < hi; index++){
                 int i = getI(index);
                 int j = getJ(index);
-                int alternatePathValue = current[getIndex(i,k)]
+                double alternatePathValue = current[getIndex(i,k)]
                         + current[getIndex(k,j)];
 
                 if(alternatePathValue < current[index]){

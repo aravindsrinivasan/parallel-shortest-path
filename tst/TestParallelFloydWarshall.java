@@ -4,21 +4,23 @@ import java.util.Arrays;
 
 import static junit.framework.TestCase.assertTrue;
 
-public class TestParallelAllPairsDjikstra {
-
+public class TestParallelFloydWarshall {
 
     @Test
-    public void test1() {
+    public void testCorrectness() {
+
         double inf = Double.POSITIVE_INFINITY;
+
         double[][] edges = {
-                {0,5,inf,10},
-                {inf,0,3,inf},
-                {inf,inf,0,1},
-                {1,inf,2,0}
+                {0, 5.0, inf, 10.0},
+                {inf, 0, 3.0, inf},
+                {inf, inf, 0, 1},
+                {1, inf, 2, 0}
         };
 
-        ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(edges, 4);
-        double[][] result = d.solve();
+        ParallelFloydWarshall f = new ParallelFloydWarshall(edges, 4);
+        f.solve();
+        double[][] result = f.allShortestPathLengths();
         double[][] expected = {
                 {0, 5, 8, 9},
                 {5, 0, 3, 4},
@@ -26,9 +28,6 @@ public class TestParallelAllPairsDjikstra {
                 {1, 6, 2, 0}
         };
         assertTrue(Arrays.deepEquals(expected, result));
-        //assertArrayEquals(expected, result, 0.01);
-        //assertArrayEquals(expected, f.run());
-
     }
 
 }
