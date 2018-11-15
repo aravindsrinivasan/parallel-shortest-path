@@ -1,5 +1,3 @@
-package src;
-
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;

@@ -1,9 +1,6 @@
 import org.junit.Test;
-import src.Djikstra;
 
-import java.util.Arrays;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 public class DjikstraTest {
 
