@@ -11,8 +11,8 @@ public class ParallelAllPairsDjikstra {
     int[][] edges;
     ExecutorService executor;
 
-    public ParallelAllPairsDjikstra(int n, int[][] e, int numThreads) {
-        this.numNodes = n;
+    public ParallelAllPairsDjikstra(int[][] e, int numThreads) {
+        this.numNodes = e.length;
         this.edges = e;
         executor = Executors.newFixedThreadPool(numThreads);
     }

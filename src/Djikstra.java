@@ -21,7 +21,7 @@ public class Djikstra {
         }
         for(int i = 0; i < numNodes; i++) {
             for(int j = 0 ; j < numNodes; j++) {
-                if(d[i][j] > 0) {
+                if(d[i][j] != Integer.MAX_VALUE) {
                     nodes[i].connections.add(nodes[j]);
                 }
             }
