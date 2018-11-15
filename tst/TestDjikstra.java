@@ -5,7 +5,7 @@ import static org.junit.Assert.assertArrayEquals;
 public class TestDjikstra {
 
     @Test
-    public void test1() {
+    public void testBasic() {
         double inf = Double.POSITIVE_INFINITY;
         double[][] edges = {
                 {inf,5,inf,10},

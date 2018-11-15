@@ -3,11 +3,12 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 
 public class TestParallelFloydWarshall {
 
     @Test
-    public void testCorrectness() {
+    public void testBasic() {
 
         double inf = Double.POSITIVE_INFINITY;
 
@@ -27,7 +28,7 @@ public class TestParallelFloydWarshall {
                 {2, 7, 0, 1},
                 {1, 6, 2, 0}
         };
-        assertTrue(Arrays.deepEquals(expected, result));
+        assertArrayEquals(expected, result);
     }
 
 }

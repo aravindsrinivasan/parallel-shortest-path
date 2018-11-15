@@ -6,7 +6,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 public class TestFloydWarshall {
     @Test
-    public void test1(){
+    public void testBasic(){
         double inf = Double.POSITIVE_INFINITY;
         double[][] edges = {
                 {0,5,inf,10},
@@ -23,7 +23,6 @@ public class TestFloydWarshall {
 
         FloydWarshall f = new FloydWarshall(edges);
         double[][] result = f.solve();
-        System.out.println(Arrays.deepToString(result));
         assertArrayEquals(expected, result);
     }
 }
