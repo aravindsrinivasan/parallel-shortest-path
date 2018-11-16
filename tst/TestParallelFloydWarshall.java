@@ -112,6 +112,7 @@ public class TestParallelFloydWarshall {
         assertArrayEquals(result, d1.solve());
     }
 
+
     @Test
     public void test4092x4092(){
         double inf = Double.POSITIVE_INFINITY;
@@ -136,4 +137,34 @@ public class TestParallelFloydWarshall {
         double[][] result = d.allShortestPathLengths();
         assertArrayEquals(result, compare);
     }
+
+    @Test
+    public void testVaryingThreadTimes() {
+
+        int[] numNodes = {4, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096};
+        for(int nodes : numNodes) {
+            System.out.println(nodes + " total nodes");
+            double inf = Double.POSITIVE_INFINITY;
+            double[][] graph = Parser.parse("tst/matrix_" + nodes + "x" + nodes + ".txt");
+            for(int i = 0; i < graph.length; i++){
+                for(int j = 0; j < graph[0].length; j++){
+                    if(graph[i][j] == 0.0) graph[i][j] = inf;
+                }
+            }
+
+            int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
+
+            for(int threads : numThreads) {
+                ParallelFloydWarshall d1 = new ParallelFloydWarshall(graph, threads);
+                long start = System.nanoTime();
+                d1.solve();
+                long end = System.nanoTime();
+                long time = end - start;
+                System.out.println("Time for " + threads + " threads: " + time);
+            }
+
+        }
+    }
+
+
 }
