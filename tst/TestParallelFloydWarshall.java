@@ -122,7 +122,7 @@ public class TestParallelFloydWarshall {
             }
         }
 
-        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, Runtime.getRuntime().availableProcessors());
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, 8);
         long start1 = System.nanoTime();
         d.solve();
         long end1 = System.nanoTime();
