@@ -11,7 +11,7 @@ class MatrixMultiply {
     int n;
 
     private final static int NUMCORES = 32767;
-    private static final int POOL_SIZE = Runtime.getRuntime().availableProcessors(),
+    private static final int POOL_SIZE = 16,
             MINIMUM_THRESHOLD = 64;
 
     private final ExecutorService exec = Executors.newFixedThreadPool(POOL_SIZE);
@@ -114,7 +114,6 @@ class MatrixMultiply {
             first.run();
             second.run();
         }
-
     }
 
 }
