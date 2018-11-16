@@ -5,18 +5,19 @@ import static org.junit.Assert.assertArrayEquals;
 public class TestDjikstra {
 
     @Test
-    public void testBasic() {
-        double inf = Double.POSITIVE_INFINITY;
-        double[][] edges = {
-                {inf,5,inf,10},
-                {inf,inf,3,inf},
-                {inf,inf,inf,1},
-                {1,inf,2,inf}
-                };
+    public void test4x4() {
 
-        Djikstra d = new Djikstra(edges, 0);
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_4x4.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        Djikstra d = new Djikstra(graph, 0);
         double[] result = d.solve();
-        double[] expected = {0, 5, 8, 9};
+        double[] expected = {0, 6, 1, 3};
         assertArrayEquals(expected, result, 0.01);
     }
 

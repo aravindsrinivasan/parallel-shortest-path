@@ -1,8 +1,5 @@
 import org.junit.Test;
 
-import java.util.Arrays;
-
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
 
 public class TestParallelAllPairsDjikstra {
