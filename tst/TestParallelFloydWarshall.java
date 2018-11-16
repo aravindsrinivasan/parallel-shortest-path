@@ -111,4 +111,29 @@ public class TestParallelFloydWarshall {
         FloydWarshall d1 = new FloydWarshall(graph);
         assertArrayEquals(result, d1.solve());
     }
+
+    @Test
+    public void test4092x4092(){
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_4096x4096.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, Runtime.getRuntime().availableProcessors());
+        long start1 = System.nanoTime();
+        d.solve();
+        long end1 = System.nanoTime();
+        FloydWarshall d1 = new FloydWarshall(graph);
+        long start2 = System.nanoTime();
+        double[][] compare = d1.solve();
+        long end2 = System.nanoTime();
+        long parallel = end1 - start1;
+        long seq = end2 - start2;
+        System.out.println("Parallel Runtime: " + parallel + " Sequential Runtime: " + seq);
+        double[][] result = d.allShortestPathLengths();
+        assertArrayEquals(result, compare);
+    }
 }
