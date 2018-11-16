@@ -84,6 +84,7 @@ public class ParallelFloydWarshall {
         }
         next = null;
         solved = true;
+        exec.shutdown();
     }
 
     /**

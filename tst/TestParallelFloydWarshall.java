@@ -1,34 +1,114 @@
 import org.junit.Test;
 
-import java.util.Arrays;
-
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
 
 public class TestParallelFloydWarshall {
 
     @Test
-    public void testBasic() {
+    public void test4x4() {
 
         double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_4x4.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
 
-        double[][] edges = {
-                {0, 5.0, inf, 10.0},
-                {inf, 0, 3.0, inf},
-                {inf, inf, 0, 1},
-                {1, inf, 2, 0}
-        };
-
-        ParallelFloydWarshall f = new ParallelFloydWarshall(edges, 4);
-        f.solve();
-        double[][] result = f.allShortestPathLengths();
-        double[][] expected = {
-                {0, 5, 8, 9},
-                {5, 0, 3, 4},
-                {2, 7, 0, 1},
-                {1, 6, 2, 0}
-        };
-        assertArrayEquals(expected, result);
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
+        d.solve();
+        double[][] result = d.allShortestPathLengths();
+        FloydWarshall d1 = new FloydWarshall(graph);
+        assertArrayEquals(result, d1.solve());
     }
 
+    @Test
+    public void test16x16() {
+
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_16x16.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
+        d.solve();
+        double[][] result = d.allShortestPathLengths();
+        FloydWarshall d1 = new FloydWarshall(graph);
+        assertArrayEquals(result, d1.solve());
+    }
+
+    @Test
+    public void test32x32() {
+
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_32x32.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
+        d.solve();
+        double[][] result = d.allShortestPathLengths();
+        FloydWarshall d1 = new FloydWarshall(graph);
+        assertArrayEquals(result, d1.solve());
+    }
+
+    @Test
+    public void test64x64() {
+
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_64x64.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
+        d.solve();
+        double[][] result = d.allShortestPathLengths();
+        FloydWarshall d1 = new FloydWarshall(graph);
+        assertArrayEquals(result, d1.solve());
+    }
+
+    @Test
+    public void test256x256() {
+
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_256x256.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
+        d.solve();
+        double[][] result = d.allShortestPathLengths();
+        FloydWarshall d1 = new FloydWarshall(graph);
+        assertArrayEquals(result, d1.solve());
+    }
+
+    @Test
+    public void test512x512() {
+
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_512x512.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
+        d.solve();
+        double[][] result = d.allShortestPathLengths();
+        FloydWarshall d1 = new FloydWarshall(graph);
+        assertArrayEquals(result, d1.solve());
+    }
 }
