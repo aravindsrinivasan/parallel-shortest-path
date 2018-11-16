@@ -1,7 +1,5 @@
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.assertArrayEquals;
 
 public class TestParallelDjikstra {
@@ -9,16 +7,17 @@ public class TestParallelDjikstra {
     @Test
     public void TestBasic(){
         int e = Integer.MAX_VALUE/2 - 10000;
-        int[][] edges = {
+        double[][] edges = {
                 {e,5,e,10},
                 {e,e,3,e},
                 {e,e,e,1},
                 {1,e,2,e}
         };
-        int[] expected = {0, 5, 8, 9};
+        double[] expected = {0, 5, 8, 9};
 
         ParallelDjikstra d = new ParallelDjikstra(edges, 0);
-        int[] result = d.solve();
-        assertArrayEquals(expected, result);
+        double[] result = d.solve();
+        assertArrayEquals(expected, result, 0.0000001);
+
     }
 }

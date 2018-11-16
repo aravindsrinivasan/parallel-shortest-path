@@ -3,7 +3,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 
 public class ParallelDjikstra {
-    private int[][] dist;
+    private double[][] dist;
     private int source;
     private int numNodes;
 
@@ -11,7 +11,7 @@ public class ParallelDjikstra {
 
     private final static int NUMCORES = 32767;
 
-    public ParallelDjikstra(int[][] matrix, int source){
+    public ParallelDjikstra(double[][] matrix, int source){
         this.source = source;
         this.dist = matrix;
         this.numNodes = matrix.length;
@@ -29,7 +29,7 @@ public class ParallelDjikstra {
         nodes[source].distance = 0;
     }
 
-    public int[] solve() {
+    public double[] solve() {
         Set<Node> nodeSet = new HashSet<>(Arrays.asList(nodes));
         Set<Node> visited = new HashSet<>();
         ForkJoinPool pool = new ForkJoinPool(NUMCORES);
@@ -46,14 +46,14 @@ public class ParallelDjikstra {
             }
             if(!current.isPresent()){
                 System.err.println("Parallel stream returned an invalid value");
-                return new int[0];
+                return new double[0];
             }
             Node node = current.get();
             nodeSet.remove(node);
             visited.add(node);
             for(Node c : node.connections) {
                 if (!visited.contains(c)) {
-                    int d = node.distance + dist[node.index][c.index];
+                    double d = node.distance + dist[node.index][c.index];
                     if (c.distance > d) {
                         c.distance = d;
                         c.pred = node;
@@ -63,7 +63,7 @@ public class ParallelDjikstra {
 
         }
         
-        int[] result = new int[numNodes];
+        double[] result = new double[numNodes];
         for(int i = 0; i < numNodes; i++){
             result[i] = nodes[i].distance;
         }
@@ -72,11 +72,11 @@ public class ParallelDjikstra {
 
     class Node {
         int index;
-        int distance;
+        double distance;
         Node pred;
         List<Node> connections;
 
-        public Node(int i, int d) {
+        public Node(int i, double d) {
             this.index = i;
             this.distance = d;
             this.pred = null;
