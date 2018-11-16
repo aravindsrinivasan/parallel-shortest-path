@@ -5,19 +5,100 @@ import static org.junit.Assert.assertArrayEquals;
 public class TestParallelDjikstra {
 
     @Test
-    public void TestBasic(){
-        int e = Integer.MAX_VALUE/2 - 10000;
-        double[][] edges = {
-                {e,5,e,10},
-                {e,e,3,e},
-                {e,e,e,1},
-                {1,e,2,e}
-        };
-        double[] expected = {0, 5, 8, 9};
+    public void test4x4() {
 
-        ParallelDjikstra d = new ParallelDjikstra(edges, 0);
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_4x4.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
         double[] result = d.solve();
-        assertArrayEquals(expected, result, 0.0000001);
+        double[] expected = {0, 6, 1, 3};
+        assertArrayEquals(expected, result, 0.01);
+    }
+
+    @Test
+    public void test16x16() {
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_16x16.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        double[] result = d.solve();
+        Djikstra d2 = new Djikstra(graph, 0);
+        assertArrayEquals(result, d2.solve(), 0.01);
+    }
+
+    @Test
+    public void test32x32(){
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_32x32.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        double[] result = d.solve();
+        Djikstra d2 = new Djikstra(graph, 0);
+        assertArrayEquals(result, d2.solve(), 0.01);
+    }
+
+    @Test
+    public void test64x64(){
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_64x64.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        double[] result = d.solve();
+        Djikstra d2 = new Djikstra(graph, 0);
+        assertArrayEquals(result, d2.solve(), 0.01);
+    }
+
+    @Test
+    public void test256x256(){
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_256x256.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        double[] result = d.solve();
+        Djikstra d2 = new Djikstra(graph, 0);
+        assertArrayEquals(result, d2.solve(), 0.01);
+    }
+
+    @Test
+    public void test512x512(){
+        double inf = Double.POSITIVE_INFINITY;
+        double[][] graph = Parser.parse("tst/matrix_512x512.txt");
+        for(int i = 0; i < graph.length; i++){
+            for(int j = 0; j < graph[0].length; j++){
+                if(graph[i][j] == 0.0) graph[i][j] = inf;
+            }
+        }
+
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        double[] result = d.solve();
+        Djikstra d2 = new Djikstra(graph, 0);
+        assertArrayEquals(result, d2.solve(), 0.01);
 
     }
 }

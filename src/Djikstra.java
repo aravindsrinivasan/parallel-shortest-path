@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Djikstra {
 
@@ -30,8 +29,8 @@ public class Djikstra {
     public double[] solve() {
 
         Set<Node> visited = new HashSet<Node>();
-        TreeSet<Node> queue = Arrays.stream(nodes)
-                .collect(Collectors.toCollection(()->new TreeSet<>(Comparator.comparing(n -> n.distance))));
+        TreeSet<Node> queue = new TreeSet<>(Comparator.comparingDouble(Node::getDistance).thenComparing(Node::getIndex));
+        queue.addAll(Arrays.asList(nodes));
 
         while(!queue.isEmpty()) {
             Node next = queue.first();
@@ -41,9 +40,9 @@ public class Djikstra {
                 if(!visited.contains(c)) {
                     double d = next.distance + distances[next.index][c.index];
                     if (c.distance > d) {
+                        queue.remove(c);
                         c.distance = d;
                         c.pred = next;
-                        queue.remove(c);
                         queue.add(c);
                     }
                 }
@@ -69,6 +68,14 @@ public class Djikstra {
             this.distance = d;
             this.pred = null;
             connections = new ArrayList<Node>();
+        }
+
+        public double getDistance(){
+            return distance;
+        }
+
+        public int getIndex(){
+            return index;
         }
     }
 
