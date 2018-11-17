@@ -15,7 +15,7 @@ public class TestParallelDjikstra {
             }
         }
 
-        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
         double[] result = d.solve();
         double[] expected = {0, 6, 1, 3};
         assertArrayEquals(expected, result, 0.01);
@@ -31,7 +31,7 @@ public class TestParallelDjikstra {
             }
         }
 
-        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
         double[] result = d.solve();
         Djikstra d2 = new Djikstra(graph, 0);
         assertArrayEquals(result, d2.solve(), 0.01);
@@ -47,7 +47,7 @@ public class TestParallelDjikstra {
             }
         }
 
-        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
         double[] result = d.solve();
         Djikstra d2 = new Djikstra(graph, 0);
         assertArrayEquals(result, d2.solve(), 0.01);
@@ -63,7 +63,7 @@ public class TestParallelDjikstra {
             }
         }
 
-        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
         double[] result = d.solve();
         Djikstra d2 = new Djikstra(graph, 0);
         assertArrayEquals(result, d2.solve(), 0.01);
@@ -79,7 +79,7 @@ public class TestParallelDjikstra {
             }
         }
 
-        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
         double[] result = d.solve();
         Djikstra d2 = new Djikstra(graph, 0);
         assertArrayEquals(result, d2.solve(), 0.01);
@@ -95,10 +95,25 @@ public class TestParallelDjikstra {
             }
         }
 
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 1);
+        long start1 = System.nanoTime();
+        double[] result = d.solve();
+        long end1 = System.nanoTime();
+        ParallelDjikstra d2 = new ParallelDjikstra(graph, 0, 2);
+        long start2 = System.nanoTime();
+        double[] compare = d2.solve();
+        long end2 = System.nanoTime();
+        long diff1 = end1 - start1;
+        long diff2 = end2 - start2;
+        System.out.println("Parallel Runtime: " + diff1 + " Sequential Runtime: " + diff2);
+        assertArrayEquals(result, compare, 0.01);
+
+        /*
         ParallelDjikstra d = new ParallelDjikstra(graph, 0);
         double[] result = d.solve();
         Djikstra d2 = new Djikstra(graph, 0);
         assertArrayEquals(result, d2.solve(), 0.01);
+        */
 
     }
 
@@ -112,7 +127,7 @@ public class TestParallelDjikstra {
             }
         }
 
-        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
         long start = System.nanoTime();
         double[] result = d.solve();
         long middle = System.nanoTime();
@@ -136,7 +151,7 @@ public class TestParallelDjikstra {
             }
         }
 
-        ParallelDjikstra d = new ParallelDjikstra(graph, 0);
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
         double[] result = d.solve();
         Djikstra d2 = new Djikstra(graph, 0);
         assertArrayEquals(result, d2.solve(), 0.01);

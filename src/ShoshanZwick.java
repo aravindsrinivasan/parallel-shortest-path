@@ -1,3 +1,5 @@
+import java.util.stream.IntStream;
+
 public class ShoshanZwick {
 
     double[][] edges;
@@ -37,15 +39,44 @@ public class ShoshanZwick {
     }
 
     private double[][] three(double[][] A, double[][] B) {
-        return null;
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel()
+                .forEach(i -> {
+                    IntStream.range(0, numNodes).parallel()
+                            .forEach(j -> {
+                                if(A[i][j] != Double.POSITIVE_INFINITY) result[i][j] = A[i][j];
+                                else if(B[i][j] != Double.POSITIVE_INFINITY) result[i][j] = B[i][j];
+                                else{
+                                    result[i][j] = Double.POSITIVE_INFINITY;
+                                }
+                            });
+                });
+        return result;
+
     }
 
     private double[][] boolean1(double[][] C) {
-        return null;
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel()
+                .forEach(i -> {
+                    IntStream.range(0, numNodes).parallel()
+                            .forEach(j -> {
+                                result[i][j] = C[i][j] >= 0 ? 1 : 0;
+                            });
+                });
+        return result;
     }
 
     private double[][] boolean2(double[][] P) {
-        return null;
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel()
+                .forEach(i -> {
+                    IntStream.range(0, numNodes).parallel()
+                            .forEach(j -> {
+                                result[i][j] = P[i][j] >= 0 && P[i][j] <= M ? 1 : 0;
+                            });
+                });
+        return result;
     }
 
 }

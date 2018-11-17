@@ -6,15 +6,17 @@ public class ParallelDjikstra {
     private double[][] dist;
     private int source;
     private int numNodes;
+    private int numThreads;
 
     private Node[] nodes;
 
     private final static int NUMCORES = 32767;
 
-    public ParallelDjikstra(double[][] matrix, int source){
+    public ParallelDjikstra(double[][] matrix, int source, int numThreads){
         this.source = source;
         this.dist = matrix;
         this.numNodes = matrix.length;
+        this.numThreads = numThreads;
         nodes = new Node[numNodes];
         for(int i = 0; i < numNodes; i++) {
             nodes[i] = new Node(i, Integer.MAX_VALUE);
@@ -32,7 +34,7 @@ public class ParallelDjikstra {
     public double[] solve() {
         Set<Node> nodeSet = new HashSet<>(Arrays.asList(nodes));
         Set<Node> visited = new HashSet<>();
-        ForkJoinPool pool = new ForkJoinPool(NUMCORES);
+        ForkJoinPool pool = new ForkJoinPool(numThreads);
         while(!nodeSet.isEmpty()){
             Optional<Node> current = Optional.empty();
             try {
