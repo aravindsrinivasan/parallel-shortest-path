@@ -76,9 +76,8 @@ public class ShoshanZwick {
                             .forEach(j -> {
                                 if(A[i][j] != Double.POSITIVE_INFINITY) result[i][j] = A[i][j];
                                 else if(B[i][j] != Double.POSITIVE_INFINITY) result[i][j] = B[i][j];
-                                else{
-                                    result[i][j] = Double.POSITIVE_INFINITY;
-                                }
+                                else result[i][j] = Double.POSITIVE_INFINITY;
+
                             });
                 });
         return result;
