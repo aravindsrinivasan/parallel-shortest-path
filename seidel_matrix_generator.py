@@ -18,17 +18,26 @@ def main(argv):
 
 	upperLimit = numberOfVertices*2
 
+        matrix = [[0 for x in range(numberOfVertices)] for y in range(numberOfVertices)];
+
 	for i in range(numberOfVertices):
 		for j in range(numberOfVertices):
+                        if j >= i:
+                                continue
+
 			randomNumber = randint(1,upperLimit)
 
 			if randomNumber > upperLimit*3/4.:
 				randomNumber = 0
                         else:
                                 randomNumber = 1;
+                        matrix[i][j] = randomNumber;
+                        matrix[j][i] = randomNumber;
 
-			file.write( "%d " % (randomNumber))
-                file.write("\n");
+        for i in range(numberOfVertices):
+                for j in range(numberOfVertices):
+                        file.write( "%d " % (matrix[i][j]))
+                file.write("\n")
 
 	file.close()
 
