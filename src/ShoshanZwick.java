@@ -108,4 +108,20 @@ public class ShoshanZwick {
         return result;
     }
 
+    private double[][] brendanIsAPieceOfShit(double[][] A, double[][] B){
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel()
+                .forEach(i -> {
+                    IntStream.range(0, numNodes).parallel()
+                    .forEach(j -> {
+                       double min = Double.MAX_VALUE;
+                       for(int k = 0; k < numNodes; k++){
+                           min = Math.min(min, A[i][k] + B[k][j]);
+                       }
+                       result[i][j] = min;
+                    });
+                });
+        return result;
+    }
+
 }
