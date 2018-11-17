@@ -1,3 +1,5 @@
+import java.util.stream.IntStream;
+
 public class ShoshanZwick {
 
     double[][] edges;
@@ -15,25 +17,55 @@ public class ShoshanZwick {
     }
 
     public double[][] solve() {
-        
+
         return null;
 
     }
 
     private double[][] clip(double[][] D, double a, double b) {
-        return null;
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel().forEach(i -> {
+            IntStream.range(0, numNodes).parallel().forEach(j -> {
+                if(D[i][j] < a) {
+                    result[i][j] = a;
+                } else if(D[i][j] <= b) {
+                    result[i][j] = D[i][j];
+                } else {
+                    result[i][j] = Double.POSITIVE_INFINITY;
+                }
+            });
+        });
+        return result;
     }
 
     private double[][] chop(double[][] D, double a, double b) {
-        return null;
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel().forEach(i -> {
+            IntStream.range(0, numNodes).parallel().forEach(j -> {
+                result[i][j] = (a <= D[i][j] && D[i][j] <= b) ? D[i][j] : Double.POSITIVE_INFINITY;
+            });
+        });
+        return result;
     }
 
     private double[][] one(double[][] A, double[][] B) {
-        return null;
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel().forEach(i -> {
+            IntStream.range(0, numNodes).parallel().forEach(j -> {
+                result[i][j] = (B[i][j] < 0) ? A[i][j] : Double.POSITIVE_INFINITY;
+            });
+        });
+        return result;
     }
 
     private double[][] two(double[][] A, double[][] B) {
-        return null;
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel().forEach(i -> {
+            IntStream.range(0, numNodes).parallel().forEach(j -> {
+                result[i][j] = (B[i][j] >= 0) ? A[i][j] : Double.POSITIVE_INFINITY;
+            });
+        });
+        return result;
     }
 
     private double[][] three(double[][] A, double[][] B) {
