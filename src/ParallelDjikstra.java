@@ -1,6 +1,7 @@
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
+import java.util.function.BinaryOperator;
 
 public class ParallelDjikstra {
     private double[][] dist;
@@ -37,15 +38,19 @@ public class ParallelDjikstra {
         ForkJoinPool pool = new ForkJoinPool(numThreads);
         while(!nodeSet.isEmpty()){
             Optional<Node> current = Optional.empty();
+            Comparator<Node> byDistance = Comparator.comparingDouble(Node::getDistance);
+            BinaryOperator<Node> shortest = BinaryOperator.minBy(byDistance);
+
             try {
                 current = pool
                         .submit(()-> nodeSet
                                 .parallelStream()
-                                .min(Comparator.comparing(n->n.distance)))
+                                .reduce(shortest))
                         .get();
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
+
             if(!current.isPresent()){
                 System.err.println("Parallel stream returned an invalid value");
                 return new double[0];
@@ -83,6 +88,10 @@ public class ParallelDjikstra {
             this.distance = d;
             this.pred = null;
             connections = new ArrayList<Node>();
+        }
+
+        double getDistance(){
+            return distance;
         }
     }
 }
