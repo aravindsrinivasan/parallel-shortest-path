@@ -23,11 +23,8 @@ public class ShoshanZwick {
     public double[][] solve() {
         D = edges;
         for(int i = 1; i <= m+1; i++) {
-            MatrixMultiply m = new MatrixMultiply(D, D);
-            double[][] s = m.solve();
-            D = clip(s, 0, 2*M);
+            D = clip(min(D, D), 0, 2*M);
         }
-        System.out.println(Arrays.deepToString(D));
         A = new double[numNodes][numNodes];
         IntStream.range(0, numNodes).parallel().forEach(i -> {
                     IntStream.range(0, numNodes).parallel().forEach(j -> {
@@ -36,8 +33,7 @@ public class ShoshanZwick {
                 }
         );
         for(int i = 1; i <= l; i++) {
-            MatrixMultiply m = new MatrixMultiply(A, A);
-            A = clip(m.solve(), -1*M, M);
+            A = clip(min(A,A), -1*M, M);
         }
         double[][] C = new double[numNodes][numNodes];
         for(double[] a : C) {
@@ -51,8 +47,8 @@ public class ShoshanZwick {
         double[][][] allC = new double[l+1][][];
         allC[l] = deepCopy(C);
         for(int i = l-1; i >= 0; i--) {
-            double[][] temp1 = one(clip(new MatrixMultiply(P, A).solve(), -1*M, M), C);
-            double[][] temp2 = two(clip(new MatrixMultiply(Q, A).solve(), -1*M, M), C);
+            double[][] temp1 = one(clip(min(P, A), -1*M, M), C);
+            double[][] temp2 = two(clip(min(Q, A), -1*M, M), C);
             C = three(temp1, temp2);
             allC[i] = deepCopy(C);
             P = three(P, Q);
@@ -182,6 +178,20 @@ public class ShoshanZwick {
         return result;
     }
 
-
+    private double[][] min(double[][] A, double[][] B){
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel()
+                .forEach(i -> {
+                    IntStream.range(0, numNodes).parallel()
+                    .forEach(j -> {
+                       double min = Double.MAX_VALUE;
+                       for(int k = 0; k < numNodes; k++){
+                           min = Math.min(min, A[i][k] + B[k][j]);
+                       }
+                       result[i][j] = min;
+                    });
+                });
+        return result;
+    }
 
 }
