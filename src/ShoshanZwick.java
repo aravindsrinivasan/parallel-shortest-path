@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class ShoshanZwick {
@@ -7,6 +8,9 @@ public class ShoshanZwick {
     int numNodes;
     int l;
     int m;
+    double[][] D;
+    double[][] P;
+    double[][] A;
 
     public ShoshanZwick(double[][] d, int M) {
         this.edges = d;
@@ -17,9 +21,79 @@ public class ShoshanZwick {
     }
 
     public double[][] solve() {
+        D = edges;
+        for(int i = 1; i <= m+1; i++) {
+            MatrixMultiply m = new MatrixMultiply(D, D);
+            double[][] s = m.solve();
+            D = clip(s, 0, 2*M);
+        }
+        System.out.println(Arrays.deepToString(D));
+        A = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel().forEach(i -> {
+                    IntStream.range(0, numNodes).parallel().forEach(j -> {
+                        A[i][j] = D[i][j] - M;
+                    });
+                }
+        );
+        for(int i = 1; i <= l; i++) {
+            MatrixMultiply m = new MatrixMultiply(A, A);
+            A = clip(m.solve(), -1*M, M);
+        }
+        double[][] C = new double[numNodes][numNodes];
+        for(double[] a : C) {
+            Arrays.fill(a, -1*M);
+        }
+        P = clip(D, 0, M);
+        double[][] Q = new double[numNodes][numNodes];
+        for(double[] a : Q) {
+            Arrays.fill(a, Double.POSITIVE_INFINITY);
+        }
+        double[][][] allC = new double[l+1][][];
+        allC[l] = deepCopy(C);
+        for(int i = l-1; i >= 0; i--) {
+            double[][] temp1 = one(clip(new MatrixMultiply(P, A).solve(), -1*M, M), C);
+            double[][] temp2 = two(clip(new MatrixMultiply(Q, A).solve(), -1*M, M), C);
+            C = three(temp1, temp2);
+            allC[i] = deepCopy(C);
+            P = three(P, Q);
+            Q = chop(C, 1 - M, M);
+        }
+        double[][][] B = new double[l+1][][];
+        for(int i = 1; i <= l; i++) {
+            B[i] = boolean1(allC[i]);
+        }
+        B[0] = boolean2(P);
+        double[][] R = new double[numNodes][numNodes];
+        IntStream.range(0, numNodes).parallel().forEach(i -> {
+            IntStream.range(0, numNodes).parallel().forEach(j -> {
+                R[i][j] = P[i][j] % M;
+            });
+        });
 
-        return null;
+        double[][] result = new double[numNodes][numNodes];
+        IntStream.range(0, l+1).forEach(i -> {
+            IntStream.range(0, numNodes).parallel().forEach(j -> {
+                IntStream.range(0, numNodes).parallel().forEach(k -> {
+                    result[j][k] = Math.pow(2, i)*B[i][j][k];
+                });
+            });
+        });
 
+        IntStream.range(0, numNodes).parallel().forEach(i -> {
+            IntStream.range(0, numNodes).parallel().forEach(j -> {
+                result[i][j] = M*result[i][j] + R[i][j];
+            });
+        });
+        return result;
+
+    }
+
+    private double[][] deepCopy(double[][] C) {
+        double[][] result = new double[C.length][];
+        for(int i = 0; i < C.length; i++) {
+            result[i] = Arrays.copyOf(C[i], C[i].length);
+        }
+        return result;
     }
 
     private double[][] clip(double[][] D, double a, double b) {
@@ -107,5 +181,7 @@ public class ShoshanZwick {
                 });
         return result;
     }
+
+
 
 }
