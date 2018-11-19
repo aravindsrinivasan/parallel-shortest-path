@@ -59,13 +59,7 @@ public class ShoshanZwick {
             B[i] = boolean1(allC[i]);
         }
         B[0] = boolean2(P);
-        double[][] R = new double[numNodes][numNodes];
-        IntStream.range(0, numNodes).parallel().forEach(i -> {
-            IntStream.range(0, numNodes).parallel().forEach(j -> {
-                R[i][j] = P[i][j] % M;
-            });
-        });
-
+        double[][] R = P;
         double[][] result = new double[numNodes][numNodes];
         IntStream.range(0, l+1).forEach(i -> {
             IntStream.range(0, numNodes).parallel().forEach(j -> {
@@ -172,7 +166,7 @@ public class ShoshanZwick {
                 .forEach(i -> {
                     IntStream.range(0, numNodes).parallel()
                             .forEach(j -> {
-                                result[i][j] = P[i][j] >= 0 && P[i][j] <= M ? 1 : 0;
+                                result[i][j] = P[i][j] > -1*M && P[i][j] < 0 ? 1 : 0;
                             });
                 });
         return result;

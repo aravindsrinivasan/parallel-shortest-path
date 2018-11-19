@@ -25,13 +25,13 @@ public class TestShoshanZwick {
         for(int nodes = 4; nodes <= 4096; nodes *= 2) {
             if(nodes == 8) continue;
             double inf = Double.POSITIVE_INFINITY;
-            double[][] graph = Parser.parse("tst/matrix_" + nodes + "x" + nodes + ".txt");
+            double[][] graph = Parser.parse("tst/sz_matrix_" + nodes + "x" + nodes + ".txt");
             for(int i = 0; i < graph.length; i++){
                 for(int j = 0; j < graph[0].length; j++){
                     if(graph[i][j] == 0.0 && i != j) graph[i][j] = inf;
                 }
             }
-            ShoshanZwick sz = new ShoshanZwick(graph, 2*nodes);
+            ShoshanZwick sz = new ShoshanZwick(graph, 16);
             long start = System.nanoTime();
             sz.solve();
             long end = System.nanoTime();
