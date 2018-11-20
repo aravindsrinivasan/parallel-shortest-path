@@ -22,7 +22,7 @@ public class TestShoshanZwick {
 
     @Test
     public void testVaryingTimes() {
-        for(int nodes = 4; nodes <= 4096; nodes *= 2) {
+        for(int nodes = 4; nodes <= 2048; nodes *= 2) {
             if(nodes == 8) continue;
             double inf = Double.POSITIVE_INFINITY;
             double[][] graph = Parser.parse("tst/sz_matrix_" + nodes + "x" + nodes + ".txt");
