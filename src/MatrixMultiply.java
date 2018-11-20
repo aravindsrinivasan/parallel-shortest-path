@@ -1,3 +1,5 @@
+import org.omg.SendingContext.RunTime;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -10,7 +12,7 @@ class MatrixMultiply {
     double[][] C;
     int n;
 
-    private static final int POOL_SIZE = 2,
+    private static final int POOL_SIZE = Runtime.getRuntime().availableProcessors(),
             MINIMUM_THRESHOLD = 64;
 
     private final ExecutorService exec = Executors.newFixedThreadPool(POOL_SIZE);

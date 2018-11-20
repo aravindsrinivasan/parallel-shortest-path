@@ -12,7 +12,6 @@ public class ParallelFloydWarshall {
 
     private int[] maxIndex;
     private int numNodes;
-    private boolean solved;
 
     private int getIndex(int i, int j){
         return i*numNodes+j;
@@ -39,13 +38,9 @@ public class ParallelFloydWarshall {
                 current[getIndex(i,j)] = distances[i][j];
             }
         }
-        this.solved = false;
     }
 
     public void solve(){
-        if(solved){
-            throw new RuntimeException("Already solved");
-        }
         for(int k = 0; k < numNodes; k++){
             List<Callable<Boolean>> tasks = new ArrayList<Callable<Boolean>>();
             if(current.length < numThreads){
@@ -77,14 +72,10 @@ public class ParallelFloydWarshall {
             next = temp;
         }
         next = null;
-        solved = true;
         exec.shutdown();
     }
 
     public double shorestPathLength(int i, int j){
-        if(!solved){
-            throw new RuntimeException("Must solve first");
-        }
         return this.current[getIndex(i,j)];
     }
 
