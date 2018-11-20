@@ -7,7 +7,7 @@ import static org.junit.Assert.assertArrayEquals;
 public class TestShoshanZwick {
 
     @Test
-    public void testBasic() {
+    public void testCorrectness() {
         double inf = Double.POSITIVE_INFINITY;
         double[][] d = {
                 {0, inf, 1, 3},

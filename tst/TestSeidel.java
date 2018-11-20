@@ -7,7 +7,7 @@ import static org.junit.Assert.assertArrayEquals;
 public class TestSeidel {
 
     @Test
-    public void testBasic() {
+    public void testCorrectness() {
         double[][] edges = {
                 {0, 1, 0, 0, 0, 1},
                 {1, 0, 1, 1, 1, 0},
