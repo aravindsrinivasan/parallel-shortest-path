@@ -1,4 +1,4 @@
-#Java implementations of single-source and all-pairs shortest paths algorithms
+# Java implementations of single-source and all-pairs shortest paths algorithms
 
 **SSSP:** Dijkstra's and Parallel Dijktra's
 **APSP:** Floyd-Warshall, Parallel Floyd-Warshall, APSP Dijkstra's, Seidel, Shoshan-Zwick (with corrections)
