@@ -5,7 +5,7 @@ import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
 
 //These tests do not test for correctness.
-public class TestDjikstra {
+public class TestDijkstra {
 
     @Test
     public void test4x4() {
@@ -18,7 +18,7 @@ public class TestDjikstra {
             }
         }
 
-        Djikstra d = new Djikstra(graph, 0);
+        Dijkstra d = new Dijkstra(graph, 0);
         double[] result = d.solve();
         double[] expected = {0, 6, 1, 3};
         assertArrayEquals(expected, result, 0.01);
@@ -34,7 +34,7 @@ public class TestDjikstra {
             }
         }
 
-        Djikstra d = new Djikstra(graph, 0);
+        Dijkstra d = new Dijkstra(graph, 0);
         double[] result = d.solve();
         Arrays.stream(result).forEach(System.out::println);
     }
@@ -49,7 +49,7 @@ public class TestDjikstra {
             }
         }
 
-        Djikstra d = new Djikstra(graph, 0);
+        Dijkstra d = new Dijkstra(graph, 0);
         double[] result = d.solve();
         Arrays.stream(result).forEach(System.out::println);
     }
@@ -64,7 +64,7 @@ public class TestDjikstra {
             }
         }
 
-        Djikstra d = new Djikstra(graph, 0);
+        Dijkstra d = new Dijkstra(graph, 0);
         double[] result = d.solve();
         Arrays.stream(result).forEach(System.out::println);
     }
@@ -79,7 +79,7 @@ public class TestDjikstra {
             }
         }
 
-        Djikstra d = new Djikstra(graph, 0);
+        Dijkstra d = new Dijkstra(graph, 0);
         double[] result = d.solve();
         Arrays.stream(result).forEach(System.out::println);
     }
@@ -94,7 +94,7 @@ public class TestDjikstra {
             }
         }
 
-        Djikstra d = new Djikstra(graph, 0);
+        Dijkstra d = new Dijkstra(graph, 0);
         double[] result = d.solve();
         Arrays.stream(result).forEach(System.out::println);
     }
@@ -109,7 +109,7 @@ public class TestDjikstra {
             }
         }
 
-        Djikstra d = new Djikstra(graph, 0);
+        Dijkstra d = new Dijkstra(graph, 0);
         double[] result = d.solve();
         Arrays.stream(result).forEach(System.out::println);
     }

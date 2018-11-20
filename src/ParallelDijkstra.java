@@ -3,7 +3,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.function.BinaryOperator;
 
-public class ParallelDjikstra {
+public class ParallelDijkstra {
     private double[][] dist;
     private int source;
     private int numNodes;
@@ -11,7 +11,7 @@ public class ParallelDjikstra {
 
     private Node[] nodes;
 
-    public ParallelDjikstra(double[][] matrix, int source, int numThreads){
+    public ParallelDijkstra(double[][] matrix, int source, int numThreads){
         this.source = source;
         this.dist = matrix;
         this.numNodes = matrix.length;

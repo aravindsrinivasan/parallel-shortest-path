@@ -1,7 +1,5 @@
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.assertArrayEquals;
 
 public class TestShoshanZwick {
@@ -15,7 +13,7 @@ public class TestShoshanZwick {
                 {inf, 4, 0, inf},
                 {2, 8, 5, 0}
         };
-        ParallelAllPairsDjikstra djikstra = new ParallelAllPairsDjikstra(d, 4);
+        ParallelAllPairsDijkstra djikstra = new ParallelAllPairsDijkstra(d, 4);
         ShoshanZwick sz = new ShoshanZwick(d, 8);
         assertArrayEquals(djikstra.solve(), sz.solve());
     }

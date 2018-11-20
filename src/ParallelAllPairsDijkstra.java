@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
-public class ParallelAllPairsDjikstra {
+public class ParallelAllPairsDijkstra {
     int numNodes;
     double[][] edges;
     ExecutorService executor;
 
-    public ParallelAllPairsDjikstra(double[][] e, int numThreads) {
+    public ParallelAllPairsDijkstra(double[][] e, int numThreads) {
         this.numNodes = e.length;
         this.edges = e;
         executor = Executors.newFixedThreadPool(numThreads);
@@ -45,7 +45,7 @@ public class ParallelAllPairsDjikstra {
 
         @Override
         public List<Double> call() throws Exception {
-            Djikstra d = new Djikstra(edges, source);
+            Dijkstra d = new Dijkstra(edges, source);
             return Arrays.stream(d.solve()).boxed().collect(Collectors.toList());
         }
     }

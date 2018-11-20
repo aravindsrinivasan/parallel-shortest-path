@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Djikstra {
+public class Dijkstra {
 
     double[][] distances;
     int source;
@@ -8,7 +8,7 @@ public class Djikstra {
 
     Node[] nodes;
 
-    public Djikstra(double[][] d, int s) {
+    public Dijkstra(double[][] d, int s) {
         this.distances = d;
         this.source = s;
         this.numNodes = d.length;
