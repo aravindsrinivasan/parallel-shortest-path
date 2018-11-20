@@ -17,10 +17,6 @@ public class Seidel {
         return APD(edges);
     }
 
-    public void changeFlag() {
-        flag = false;
-    }
-
     public double[][] APD(double[][] A) {
         MatrixMultiply m = new MatrixMultiply(A, A);
         double[][] Z = m.solve();

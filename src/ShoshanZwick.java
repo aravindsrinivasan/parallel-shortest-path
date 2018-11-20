@@ -23,7 +23,7 @@ public class ShoshanZwick {
     public double[][] solve() {
         D = edges;
         for(int i = 1; i <= m+1; i++) {
-            D = clip(min(D, D), 0, 2*M);
+            D = clip(distanceMatrix(D, D), 0, 2*M);
         }
         A = new double[numNodes][numNodes];
         IntStream.range(0, numNodes).parallel().forEach(i -> {
@@ -33,7 +33,7 @@ public class ShoshanZwick {
                 }
         );
         for(int i = 1; i <= l; i++) {
-            A = clip(min(A,A), -1*M, M);
+            A = clip(distanceMatrix(A,A), -1*M, M);
         }
         double[][] C = new double[numNodes][numNodes];
         for(double[] a : C) {
@@ -47,18 +47,18 @@ public class ShoshanZwick {
         double[][][] allC = new double[l+1][][];
         allC[l] = deepCopy(C);
         for(int i = l-1; i >= 0; i--) {
-            double[][] temp1 = one(clip(min(P, A), -1*M, M), C);
-            double[][] temp2 = two(clip(min(Q, A), -1*M, M), C);
-            C = three(temp1, temp2);
+            double[][] temp1 = adjacentLessThan0(clip(distanceMatrix(P, A), -1*M, M), C);
+            double[][] temp2 = adjacentGreaterThan0(clip(distanceMatrix(Q, A), -1*M, M), C);
+            C = adjacentInfinityComparison(temp1, temp2);
             allC[i] = deepCopy(C);
-            P = three(P, Q);
+            P = adjacentInfinityComparison(P, Q);
             Q = chop(C, 1 - M, M);
         }
         double[][][] B = new double[l+1][][];
         for(int i = 1; i <= l; i++) {
-            B[i] = boolean1(allC[i]);
+            B[i] = booleanPositiveReduction(allC[i]);
         }
-        B[0] = boolean2(P);
+        B[0] = booleanRangeReduction(P);
         double[][] R = P;
         double[][] result = new double[numNodes][numNodes];
         IntStream.range(0, l+1).forEach(i -> {
@@ -112,7 +112,7 @@ public class ShoshanZwick {
         return result;
     }
 
-    private double[][] one(double[][] A, double[][] B) {
+    private double[][] adjacentLessThan0(double[][] A, double[][] B) {
         double[][] result = new double[numNodes][numNodes];
         IntStream.range(0, numNodes).parallel().forEach(i -> {
             IntStream.range(0, numNodes).parallel().forEach(j -> {
@@ -122,7 +122,7 @@ public class ShoshanZwick {
         return result;
     }
 
-    private double[][] two(double[][] A, double[][] B) {
+    private double[][] adjacentGreaterThan0(double[][] A, double[][] B) {
         double[][] result = new double[numNodes][numNodes];
         IntStream.range(0, numNodes).parallel().forEach(i -> {
             IntStream.range(0, numNodes).parallel().forEach(j -> {
@@ -132,7 +132,7 @@ public class ShoshanZwick {
         return result;
     }
 
-    private double[][] three(double[][] A, double[][] B) {
+    private double[][] adjacentInfinityComparison(double[][] A, double[][] B) {
         double[][] result = new double[numNodes][numNodes];
         IntStream.range(0, numNodes).parallel()
                 .forEach(i -> {
@@ -148,7 +148,7 @@ public class ShoshanZwick {
 
     }
 
-    private double[][] boolean1(double[][] C) {
+    private double[][] booleanPositiveReduction(double[][] C) {
         double[][] result = new double[numNodes][numNodes];
         IntStream.range(0, numNodes).parallel()
                 .forEach(i -> {
@@ -160,7 +160,7 @@ public class ShoshanZwick {
         return result;
     }
 
-    private double[][] boolean2(double[][] P) {
+    private double[][] booleanRangeReduction(double[][] P) {
         double[][] result = new double[numNodes][numNodes];
         IntStream.range(0, numNodes).parallel()
                 .forEach(i -> {
@@ -172,7 +172,7 @@ public class ShoshanZwick {
         return result;
     }
 
-    private double[][] min(double[][] A, double[][] B){
+    private double[][] distanceMatrix(double[][] A, double[][] B){
         double[][] result = new double[numNodes][numNodes];
         IntStream.range(0, numNodes).parallel()
                 .forEach(i -> {
