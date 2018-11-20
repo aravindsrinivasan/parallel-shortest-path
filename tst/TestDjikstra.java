@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertArrayEquals;
 
+//These tests do not test for correctness.
 public class TestDjikstra {
 
     @Test
@@ -102,21 +103,6 @@ public class TestDjikstra {
     public void test4096x4096(){
         double inf = Double.POSITIVE_INFINITY;
         double[][] graph = Parser.parse("tst/matrix_4096x4096.txt");
-        for(int i = 0; i < graph.length; i++){
-            for(int j = 0; j < graph[0].length; j++){
-                if(graph[i][j] == 0.0) graph[i][j] = inf;
-            }
-        }
-
-        Djikstra d = new Djikstra(graph, 0);
-        double[] result = d.solve();
-        Arrays.stream(result).forEach(System.out::println);
-    }
-
-    @Test
-    public void test8192x8192(){
-        double inf = Double.POSITIVE_INFINITY;
-        double[][] graph = Parser.parse("tst/matrix_8192x8192.txt");
         for(int i = 0; i < graph.length; i++){
             for(int j = 0; j < graph[0].length; j++){
                 if(graph[i][j] == 0.0) graph[i][j] = inf;

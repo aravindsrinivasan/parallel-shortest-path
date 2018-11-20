@@ -11,8 +11,6 @@ public class ParallelDjikstra {
 
     private Node[] nodes;
 
-    private final static int NUMCORES = 32767;
-
     public ParallelDjikstra(double[][] matrix, int source, int numThreads){
         this.source = source;
         this.dist = matrix;

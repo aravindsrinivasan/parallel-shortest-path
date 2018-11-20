@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
+//These tests do not test for correctness
 public class TestFloydWarshall {
 
     @Test

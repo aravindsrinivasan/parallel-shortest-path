@@ -10,7 +10,6 @@ class MatrixMultiply {
     double[][] C;
     int n;
 
-    private final static int NUMCORES = 32767;
     private static final int POOL_SIZE = 2,
             MINIMUM_THRESHOLD = 64;
 

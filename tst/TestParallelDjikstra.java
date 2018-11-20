@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class TestParallelDjikstra {
 
@@ -15,9 +15,8 @@ public class TestParallelDjikstra {
             }
         }
 
-
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for(int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -26,6 +25,15 @@ public class TestParallelDjikstra {
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
         }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+                assertEquals(result[i], expected[i], 0.0001);
+            }
     }
 
     @Test
@@ -38,8 +46,8 @@ public class TestParallelDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for (int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -47,6 +55,15 @@ public class TestParallelDjikstra {
             long end = System.nanoTime();
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
+        }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
         }
     }
 
@@ -60,8 +77,8 @@ public class TestParallelDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for (int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -69,6 +86,15 @@ public class TestParallelDjikstra {
             long end = System.nanoTime();
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
+        }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
         }
     }
 
@@ -82,8 +108,8 @@ public class TestParallelDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for (int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -91,6 +117,15 @@ public class TestParallelDjikstra {
             long end = System.nanoTime();
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
+        }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
         }
     }
 
@@ -104,8 +139,8 @@ public class TestParallelDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for (int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -113,6 +148,15 @@ public class TestParallelDjikstra {
             long end = System.nanoTime();
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
+        }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
         }
     }
 
@@ -126,8 +170,8 @@ public class TestParallelDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for (int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -135,6 +179,15 @@ public class TestParallelDjikstra {
             long end = System.nanoTime();
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
+        }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
         }
     }
 
@@ -148,8 +201,8 @@ public class TestParallelDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for (int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -157,6 +210,15 @@ public class TestParallelDjikstra {
             long end = System.nanoTime();
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
+        }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
         }
     }
 
@@ -170,8 +232,8 @@ public class TestParallelDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for (int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -179,6 +241,15 @@ public class TestParallelDjikstra {
             long end = System.nanoTime();
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
+        }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
         }
     }
 
@@ -192,8 +263,8 @@ public class TestParallelDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
-
         for (int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
             long start = System.nanoTime();
@@ -201,6 +272,15 @@ public class TestParallelDjikstra {
             long end = System.nanoTime();
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
+        }
+
+        //Checks for correctness
+        ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
+        double[] result = d.solve();
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
         }
 
     }
@@ -214,6 +294,8 @@ public class TestParallelDjikstra {
                 if(graph[i][j] == 0.0) graph[i][j] = inf;
             }
         }
+
+        //Prints out runtime for threads 1 to 64 in powers of 2
         int[] numThreads = {1, 2, 4, 8, 16, 32, 64};
         for(int threads : numThreads) {
             ParallelDjikstra d1 = new ParallelDjikstra(graph, 0, threads);
@@ -223,23 +305,14 @@ public class TestParallelDjikstra {
             long time = end - start;
             System.out.println("Time for " + threads + " threads: " + time);
         }
-    }
 
-    //Takes incredibly long, would not recommend running
-    @Test
-    public void test8192x8192(){
-        double inf = Double.POSITIVE_INFINITY;
-        double[][] graph = Parser.parse("tst/matrix_8192x8192.txt");
-        for(int i = 0; i < graph.length; i++){
-            for(int j = 0; j < graph[0].length; j++){
-                if(graph[i][j] == 0.0) graph[i][j] = inf;
-            }
-        }
-
+        //Checks for correctness
         ParallelDjikstra d = new ParallelDjikstra(graph, 0, 4);
         double[] result = d.solve();
-        Djikstra d2 = new Djikstra(graph, 0);
-        assertArrayEquals(result, d2.solve(), 0.01);
-
+        Djikstra d1 = new Djikstra(graph, 0);
+        double[] expected = d1.solve();
+        for(int i = 0; i < result.length; i++){
+            assertEquals(result[i], expected[i], 0.0001);
+        }
     }
-}
+ }

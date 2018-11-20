@@ -26,12 +26,6 @@ public class ParallelFloydWarshall {
         return index % numNodes;
     }
 
-    /**
-     * @param distances the matrix of distances between nodes, indexed from 0 to
-     *                  numNodes-1.  distances[i][j] cost of a directed edge from
-     *                  i to j.  Must be Double.POSITIVE_INFINITY if the edge is
-     *                  not present.  distance[i][i] is a self arc (allowed).
-     */
     public ParallelFloydWarshall(double[][] distances, int numThreads){
         this.exec = Executors.newFixedThreadPool(numThreads);
         this.numThreads = numThreads;
@@ -87,31 +81,13 @@ public class ParallelFloydWarshall {
         exec.shutdown();
     }
 
-    /**
-     *
-     * @param i must lie in in [0,numNodes)
-     * @param j must lie in in [0,numNodes)
-     * @return the length of the shortest directed path from node i to node j.
-     *         If i == j, gives the shortest directed cycle starting at node i
-     *          (note that the graph may contain nodes with self loops).  Returns
-     *         Double.POSITIVE_INFINITY if there is no path from i to j.
-     */
     public double shorestPathLength(int i, int j){
         if(!solved){
             throw new RuntimeException("Must solve first");
         }
         return this.current[getIndex(i,j)];
     }
-    /**
-     * Example: If the path from node 2 to node 5 is an edge from 2 to 3 and then
-     * an edge from 3 to 5, the return value will be
-     * Arrays.asList(Integer.valueOf(2),Integer.valueOf(3),Integer.valueOf(5));
-     *
-     * @param i the start of the directed path
-     * @param j the end of the directed path
-     * @return The shortest path starting at node i and ending at node j, or null
-     *         if no such path exists.
-     */
+
     public List<Integer> shortestPath(int i, int j){
         if(current[getIndex(i,j)] == Double.POSITIVE_INFINITY){
             return null;

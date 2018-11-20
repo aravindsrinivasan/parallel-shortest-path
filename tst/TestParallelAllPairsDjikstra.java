@@ -15,6 +15,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -24,6 +25,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -46,6 +48,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -55,6 +58,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -77,6 +81,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -86,6 +91,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -108,6 +114,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -117,6 +124,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -139,6 +147,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -148,6 +157,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -170,6 +180,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -179,6 +190,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -201,6 +213,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -210,6 +223,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -233,6 +247,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -242,6 +257,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -265,6 +281,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -274,6 +291,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);
@@ -297,6 +315,7 @@ public class TestParallelAllPairsDjikstra {
             }
         }
 
+        //Prints out runtime for threads 1 to 64 in powers of 2
         for(int i = 1; i <= 64; i *= 2){
             ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, i);
             long start = System.nanoTime();
@@ -306,6 +325,7 @@ public class TestParallelAllPairsDjikstra {
             System.out.println("Number of threads: " + i + " Time in NS: " + diff);
         }
 
+        //Checks for correctness
         ParallelAllPairsDjikstra d = new ParallelAllPairsDjikstra(graph, graph.length);
         double[][] result = d.solve();
         FloydWarshall d1 = new FloydWarshall(graph);

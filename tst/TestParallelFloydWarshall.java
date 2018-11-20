@@ -15,6 +15,7 @@ public class TestParallelFloydWarshall {
             }
         }
 
+        //Tests for correctness
         ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
         d.solve();
         double[][] result = d.allShortestPathLengths();
@@ -33,6 +34,7 @@ public class TestParallelFloydWarshall {
             }
         }
 
+        //Tests for correctness
         ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
         d.solve();
         double[][] result = d.allShortestPathLengths();
@@ -51,6 +53,7 @@ public class TestParallelFloydWarshall {
             }
         }
 
+        //Tests for correctness
         ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
         d.solve();
         double[][] result = d.allShortestPathLengths();
@@ -69,6 +72,7 @@ public class TestParallelFloydWarshall {
             }
         }
 
+        //Tests for correctness
         ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
         d.solve();
         double[][] result = d.allShortestPathLengths();
@@ -87,6 +91,7 @@ public class TestParallelFloydWarshall {
             }
         }
 
+        //Tests for correctness
         ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
         d.solve();
         double[][] result = d.allShortestPathLengths();
@@ -105,6 +110,7 @@ public class TestParallelFloydWarshall {
             }
         }
 
+        //Tests for correctness
         ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
         d.solve();
         double[][] result = d.allShortestPathLengths();
@@ -114,7 +120,7 @@ public class TestParallelFloydWarshall {
 
 
     @Test
-    public void test4092x4092(){
+    public void test4096x4096(){
         double inf = Double.POSITIVE_INFINITY;
         double[][] graph = Parser.parse("tst/matrix_4096x4096.txt");
         for(int i = 0; i < graph.length; i++){
@@ -123,19 +129,12 @@ public class TestParallelFloydWarshall {
             }
         }
 
-        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, 8);
-        long start1 = System.nanoTime();
+        //Tests for correctness
+        ParallelFloydWarshall d = new ParallelFloydWarshall(graph, graph.length);
         d.solve();
-        long end1 = System.nanoTime();
-        FloydWarshall d1 = new FloydWarshall(graph);
-        long start2 = System.nanoTime();
-        double[][] compare = d1.solve();
-        long end2 = System.nanoTime();
-        long parallel = end1 - start1;
-        long seq = end2 - start2;
-        System.out.println("Parallel Runtime: " + parallel + " Sequential Runtime: " + seq);
         double[][] result = d.allShortestPathLengths();
-        assertArrayEquals(result, compare);
+        FloydWarshall d1 = new FloydWarshall(graph);
+        assertArrayEquals(result, d1.solve());
     }
 
     @Test
